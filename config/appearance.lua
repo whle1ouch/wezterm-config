@@ -30,7 +30,7 @@ return {
             },
             width = "100%",
             height = "100%",
-            opacity = 0.7,
+            opacity = 0.6,
         },
     },
 
@@ -41,7 +41,7 @@ return {
     enable_tab_bar = true,
     hide_tab_bar_if_only_one_tab = false,
     use_fancy_tab_bar = false,
-    tab_max_width = 25,
+    tab_max_width = 20,
     show_tab_index_in_tab_bar = false,
     switch_to_last_active_tab_when_closing_tab = true,
 
@@ -49,8 +49,8 @@ return {
     initial_rows = 40,
     initial_cols = 100,
     window_padding = {
-        left = 7.5,
-        right = 7.5,
+        left = 0,
+        right = 0,
         top = 10,
         bottom = 7.5,
     },

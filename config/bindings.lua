@@ -7,9 +7,11 @@ local mod = {}
 if platform.is_mac then
     mod.SUPER = 'SUPER'
     mod.SUPER_REV = 'SUPER|CTRL'
+    mod.CTRLC = "SUPER"
 elseif platform.is_win or platform.is_linux then
     mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
     mod.SUPER_REV = 'ALT|CTRL'
+    mod.CTRLC = "CTRL"
 end
 
 -- stylua: ignore
@@ -53,8 +55,9 @@ local keys = {
     { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
 
     -- copy/paste --
-    { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') },
-    { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') },
+    { key = 'c',          mods = 'CTRL|SHIFT', action = 'ActivateCopyMode' },
+    { key = 'c',          mods = mod.CTRLC,  action = act.CopyTo('Clipboard') },
+    { key = 'v',          mods = mod.CTRLC,        action = act.PasteFrom('Clipboard') },
 
     -- tabs --
     -- tabs: spawn+close
@@ -63,10 +66,10 @@ local keys = {
     { key = 'w',          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
 
     -- tabs: navigation
-    { key = '[',          mods = mod.SUPER,     action = act.ActivateTabRelative(-1) },
-    { key = ']',          mods = mod.SUPER,     action = act.ActivateTabRelative(1) },
-    { key = '[',          mods = mod.SUPER_REV, action = act.MoveTabRelative(-1) },
-    { key = ']',          mods = mod.SUPER_REV, action = act.MoveTabRelative(1) },
+    { key = 'h',          mods = "CTRL",     action = act.ActivateTabRelative(-1) },
+    { key = 'l',          mods = "CTRL",     action = act.ActivateTabRelative(1) },
+    { key = '[',          mods = mod.SUPER, action = act.MoveTabRelative(-1) },
+    { key = ']',          mods = mod.SUPER, action = act.MoveTabRelative(1) },
 
     -- tab: title
     { key = '0',          mods = mod.SUPER,     action = act.EmitEvent('tabs.manual-update-tab-title') },
@@ -82,7 +85,7 @@ local keys = {
     -- window: zoom window
     {
         key = '-',
-        mods = mod.SUPER,
+        mods = mod.SUPER_REV,
         action = wezterm.action_callback(function(window, _pane)
             local dimensions = window:get_dimensions()
             if dimensions.is_full_screen then
@@ -95,7 +98,7 @@ local keys = {
     },
     {
         key = '=',
-        mods = mod.SUPER,
+        mods = mod.SUPER_REV,
         action = wezterm.action_callback(function(window, _pane)
             local dimensions = window:get_dimensions()
             if dimensions.is_full_screen then
@@ -126,10 +129,10 @@ local keys = {
     { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
 
     -- panes: navigation
-    { key = 'k',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Up') },
-    { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
-    { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
-    { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
+    { key = 'k',     mods = mod.SUPER, action = act.ActivatePaneDirection('Up') },
+    { key = 'j',     mods = mod.SUPER, action = act.ActivatePaneDirection('Down') },
+    { key = 'h',     mods = mod.SUPER, action = act.ActivatePaneDirection('Left') },
+    { key = 'l',     mods = mod.SUPER, action = act.ActivatePaneDirection('Right') },
     { key = "q",     mods = "CTRL",        action = act.CloseCurrentPane({ confirm = false }) },
     {
         key = 'p',

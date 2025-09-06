@@ -19,8 +19,8 @@ return {
    wsl_domains = {
       {
          name = 'WSL:Ubuntu',
-         distribution = 'Ubuntu',
-         username = 'wanghl',
+         distribution = 'Ubuntu-24.04',
+         username = 'whl',
          default_cwd = '/',
          default_prog = { 'bash', '-l' },
       },

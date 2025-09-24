@@ -26,7 +26,7 @@ return {
     background = {
         {
             source = {
-                Color = "#161717",
+                Color = "#171B22",
             },
             width = "100%",
             height = "100%",
@@ -49,8 +49,8 @@ return {
     initial_rows = 40,
     initial_cols = 100,
     window_padding = {
-        left = 0,
-        right = 0,
+        left = 2.5,
+        right = 2.5,
         top = 10,
         bottom = 7.5,
     },
@@ -58,7 +58,7 @@ return {
     window_close_confirmation = 'NeverPrompt',
     window_frame = {
         active_titlebar_bg = '#090909',
-        border_bottom_height = "0.1cell",
+        border_bottom_height = "0.2cell",
         -- font = fonts.font,
         -- font_size = fonts.font_size,
     },

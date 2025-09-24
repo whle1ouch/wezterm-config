@@ -1,17 +1,17 @@
-local wezterm = require('wezterm')
-local platform = require('utils.platform')
+local wezterm = require("wezterm")
+local platform = require("utils.platform")
 local act = wezterm.action
 
 local mod = {}
 
 if platform.is_mac then
-    mod.SUPER = 'SUPER'
-    mod.SUPER_REV = 'SUPER|CTRL'
-    mod.CTRLC = "SUPER"
+	mod.SUPER = "SUPER"
+	mod.SUPER_REV = "SUPER|CTRL"
+	mod.CTRLC = "SUPER"
 elseif platform.is_win or platform.is_linux then
-    mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
-    mod.SUPER_REV = 'ALT|CTRL'
-    mod.CTRLC = "CTRL"
+	mod.SUPER = "ALT" -- to not conflict with Windows key shortcuts
+	mod.SUPER_REV = "ALT|CTRL"
+	mod.CTRLC = "CTRL"
 end
 
 -- stylua: ignore
@@ -52,8 +52,9 @@ local keys = {
     -- cursor movement --
     { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\u{1b}OH' },
     { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
+    { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
     { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
-
+    { key = "Enter", mods = "CTRL", action = act.SendKey{ key = 'RightArrow' }},
     -- copy/paste --
     { key = 'c',          mods = 'CTRL|SHIFT', action = 'ActivateCopyMode' },
     { key = 'c',          mods = mod.CTRLC,  action = act.CopyTo('Clipboard') },
@@ -189,19 +190,19 @@ local key_tables = {
 }
 
 local mouse_bindings = {
-    -- Ctrl-click will open the link under the mouse cursor
-    {
-        event = { Up = { streak = 1, button = 'Left' } },
-        mods = 'CTRL',
-        action = act.OpenLinkAtMouseCursor,
-    },
+	-- Ctrl-click will open the link under the mouse cursor
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.OpenLinkAtMouseCursor,
+	},
 }
 
 return {
-    disable_default_key_bindings = true,
-    -- disable_default_mouse_bindings = true,
-    leader = { key = 'Space', mods = mod.SUPER_REV },
-    keys = keys,
-    key_tables = key_tables,
-    mouse_bindings = mouse_bindings,
+	disable_default_key_bindings = true,
+	-- disable_default_mouse_bindings = true,
+	leader = { key = "Space", mods = mod.SUPER_REV },
+	keys = keys,
+	key_tables = key_tables,
+	mouse_bindings = mouse_bindings,
 }
